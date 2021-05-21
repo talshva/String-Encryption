@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Encoding 🔒</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lobster&family=Yanone+Kaffeesatz:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="onInit()">
+
+    <h1>String Encoding</h1>
+
+    <div class="Method-container">
+        <h6>Method:</h6>
+        <section class="Method">
+            <select onchange="onSetMethod(this.value)">
+                <option value="Base64">Base64</option>
+                <option value="Byte Pair">Byte Pair</option>
+                <option value="Cyclic Char">Cyclic Char</option>
+                <option value="Cyclic Bit">Cyclic Bit</option>
+            </select>
+        </section>
+
+        <section class="Mode">
+            <select onchange="onSetMode(this.value)">
+                <option value="Encode">Encoding</option>
+                <option value="Decode">Decoding</option>
+            </select>
+            <input class="amount" id="amount" placeholder="Amount" />
+        </section>
+    </div>
+    <div class="main-container">
+        <button style="margin:5px;" class="btn" onclick="onRandom()">Random String</button>
+        <input class="new-String-txt" type="String" placeholder="Enter a String" />
+        <button style="margin:5px;" class="btn" onclick="onConvert()">Convert</button>
+        <button style="margin:5px;" class="btn" onclick="onHistogram()">Histogram</button>
+    </div>
+
+    <section class="Error">
+        Convertion Error
+    </section>
+
+    <section class="outputString">
+        String:
+    </section>
+
+    <section class = "copy">
+    <button onclick="copyRules()">Copy Rules List</button>
+    </section>
+    
+
+    
+    
+    
+    <footer>
+        Made by Tal Shvartzberg
+    </footer>
+
+    <script src="js/services/String-service.js"></script>
+    <script src="js/services/bank.js"></script>
+    <script src="js/services/Emethods.js"></script>
+    <script src="js/String-controller.js"></script>
+</body>
+
+</html>
