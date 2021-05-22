@@ -133,6 +133,7 @@ function Cyclic_Bit(mode, amount){
         a = ("00000000" + a).slice(-8)
         temp_bin+=a;
     }
+    amount = amount % temp_bin.length
     if (amount >= 0){
     var temp = temp_bin.slice(0,amount);
     temp_bin = temp_bin.slice(amount,temp_bin.length) + temp
