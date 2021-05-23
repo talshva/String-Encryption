@@ -1,16 +1,25 @@
 function Base64(mode){
     if(mode == 'Encode'){
+        if (!gString.split('').every(checkInB64)){ 
+            Errorhandling('Base 64 Encoding');
+            gOutString = ''
+            return;}
         var encodedData = window.btoa(gString);
         encodedData = encodedData.replaceAll('=','');
     }else{
         try {
-        var encodedData = window.atob(gString);
-        }
-        catch(err) {
+            var encodedData = window.atob(gString);
+            if (!encodedData.split('').every(checkInB64)){ 
+                Errorhandling('Base 64 Decoding');
+                gOutString = ''
+                return;
+            }
+        }catch(err) {
             Errorhandling('Base 64 Decoding')
           }
     }
     gOutString = encodedData
+    
 }
 
 function Byte_Pair(mode){
