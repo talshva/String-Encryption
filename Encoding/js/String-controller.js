@@ -7,7 +7,7 @@ function onInit() {
 }
 
 function onConvert() {
-  // מה קורה בעת הלחיצה על add
+  // מה קורה בעת הלחיצה על Convert
   var elNewStringTxt = document.querySelector('.new-String-txt');
   var elOutputString = document.querySelector('.outputString');
   var elCopy = document.querySelector('.copy');
@@ -42,12 +42,10 @@ function onHistogram(){
 }
 
 function onSetMethod(method) {
-  // מה קורה בלחיצה על הפילטר
   setMethod(method);
 }
 
 function onSetMode(mode) {
-  // מה קורה בלחיצה על סדר החשיבות
   setMode(mode);
 }
 
