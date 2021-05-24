@@ -10,7 +10,7 @@ body {
     font-size: 2em;
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient( 100.5deg, rgb(183, 219, 240) 100%, rgb(255, 255, 255) 100%);
+    background-image: linear-gradient( 100.5deg, rgb(252, 217, 195) 100%, rgb(255, 255, 255) 100%);
 }
 
 h1 {
