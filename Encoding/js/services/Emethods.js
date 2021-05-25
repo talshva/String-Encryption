@@ -42,6 +42,8 @@ function Byte_Pair(mode){
         while (true){
            var couples = []
            var couples_dict = {};
+           var coup = ''
+           var highestVal = 0;
             for (var i = 0 ; i<gString.length ; i++){
                 if(gString.slice(i, i+2) == gString.slice(i-1, i+1)){
                     if (flag == 0){
@@ -57,12 +59,15 @@ function Byte_Pair(mode){
             
             for (var i=0; i < couples.length; i++) {
             couples_dict[couples[i]] = (couples_dict[couples[i]] || 0) +1 ;
-            }
-            var highestVal = Math.max.apply(null, Object.values(couples_dict)),
+            
+            var highest = Math.max.apply(null, Object.values(couples_dict)),
             val = Object.keys(couples_dict).find(function(a) {
              return couples_dict[a] === highestVal; })
-
-            const coup = Object.keys(couples_dict).find(coup => couples_dict[coup] === highestVal);
+                if (highest > highestVal){
+                highestVal = highest;
+                coup = Object.keys(couples_dict).find(coup => couples_dict[coup] === highest);
+                }
+            }
 
             if (highestVal == 1){
             break;
@@ -95,6 +100,7 @@ function Byte_Pair(mode){
         }
     }
 }
+
 
 function Cyclic_Char(mode, amount){
     if (mode == 'Encode'){
