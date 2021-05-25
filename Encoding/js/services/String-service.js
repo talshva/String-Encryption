@@ -70,7 +70,8 @@ navigator.clipboard.writeText(gRules).then(function() {
 function setRandom(){
   var chrlist = (upper_case + lower_case + digits).replaceAll(',', '')
   var randomstring = "";
-  for (var counter = 0; counter < 8; counter++) {
+  var randLength = Math.floor(Math.random() * 20 + 1)
+  for (var counter = 0; counter < randLength; counter++) {
     randomstring += chrlist[parseInt(Math.floor(Math.random() * chrlist.length))];
   }
   gString = randomstring
