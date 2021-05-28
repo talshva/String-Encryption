@@ -40,6 +40,8 @@ function Byte_Pair(mode){
         var flag = j = 0;
         var rules = []
         while (true){
+           if(gString.length == 1){
+           break;}
            var couples = []
            var couples_dict = {};
            var coup = ''
