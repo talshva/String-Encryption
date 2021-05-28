@@ -1,6 +1,6 @@
 function Base64(mode){
     if(mode == 'Encode'){
-        if (!gString.split('').every(checkInB64)){ 
+        if (gString.charCodeAt(i) <32 || gString.charCodeAt(i) >127){
             Errorhandling('Base 64 Encoding');
             gOutString = ''
             return;}
