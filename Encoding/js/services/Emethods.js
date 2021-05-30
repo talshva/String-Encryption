@@ -9,7 +9,7 @@ function Base64(mode){
     }else{
         try {
             var encodedData = window.atob(gString);
-            if (!encodedData.split('').every(checkInB64)){ 
+            if (!encodedData.replace(' ', '').split('').every(checkInB64)){ 
                 Errorhandling('Base 64 Decoding');
                 gOutString = ''
                 return;
