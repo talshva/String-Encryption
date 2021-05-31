@@ -26,83 +26,71 @@ function Byte_Pair(mode){
     var group = ''
     if (mode == 'Encode'){
         if (gString.split('').every(checkInOther)){
-            group = other;
-        }else if(gString.split('').every(checkInDigits)){
-            group = digits;
-        }else if(gString.split('').every(checkInUpper)){
-            group = upper_case;
-        }else if(gString.split('').every(checkInLower)){
-            group = lower_case;
-        }else{
-            Errorhandling('Byte Pair Encoding');
-        }
-
-        var flag = j = 0;
-        var rules = []
-        while (true){
-           if(gString.length == 1){
-           break;}
-           var couples = []
-           var couples_dict = {};
-           var coup = ''
-           var highestVal = 0;
-            for (var i = 0 ; i<gString.length ; i++){
-                if(gString.slice(i, i+2) == gString.slice(i-1, i+1)){
-                    if (flag == 0){
-                        flag = 1;
-                        continue;
-                    }
-                }
-                if (gString.slice(i,i+2).length == 2){
-                couples.push(gString.slice(i, i+2)) ;
-                flag = 0;
-                }
-            }
-            
-            for (var i=0; i < couples.length; i++) {
-            couples_dict[couples[i]] = (couples_dict[couples[i]] || 0) +1 ;
-            
-            var highest = Math.max.apply(null, Object.values(couples_dict)),
-            val = Object.keys(couples_dict).find(function(a) {
-             return couples_dict[a] === highestVal; })
-                if (highest > highestVal){
-                highestVal = highest;
-                coup = Object.keys(couples_dict).find(coup => couples_dict[coup] === highest);
-                }
-            }
-
-            if (highestVal == 1){
-            break;
-            }
-            gString = gString.replaceAll(coup, group[j]);
-            rules.push(group[j] + ' = ' + coup)
-            j += 1;
-        }
-        gOutString = gString
-        gRules = rules
-
-    }else{
-        var rules = gRules;
-        
-        if (rules == []){
-        Errorhandling('Byte Pair decoding')
-        return;
-        } 
-        rules = rules.replace('/', '') 
-        var rule_list = rules.split(',') 
-        for (var i = 0 ; i<rule_list.length ; i++){
-           rule_list[i] = rule_list[i].replaceAll(' = ', ',')
-        }
-        
-        var temp_str = gString
-        for (var i = rule_list.length-1 ; i>=0 ; i--){
-            var coup = rule_list[i].split(',')
-            temp_str = temp_str.replaceAll(coup[0], coup[1])
-        gOutString = temp_str
-        }
-    }
+            group = other;
+        }else if(gString.split('').every(checkInDigits)){
+            group = digits;
+        }else if(gString.split('').every(checkInUpper)){
+            group = upper_case;
+        }else if(gString.split('').every(checkInLower)){
+            group = lower_case;
+        }else{
+            Errorhandling('Byte Pair Encoding');
+        }
+        var flag = j = 0;
+        var rules = []
+        while (true){
+            if(gString.length == 1){
+               break;}
+            var couples_map = new Map();
+            var coup = ''
+            var highestVal = 0;
+            for (var i = 0 ; i<gString.length ; i++){
+                if(gString.slice(i, i+2) == gString.slice(i-1, i+1)){
+                    if (flag == 0){
+                        flag = 1;
+                        continue;
+                    }
+                }
+                if (gString.slice(i,i+2).length == 2){
+                    var couple = gString.slice(i, i+2);
+                    couples_map.set(couple, (couples_map.get(couple) ?? 0) + 1);
+                    flag = 0;
+                }
+            }
+           couples_map = new Map([...couples_map.entries()].sort((a, b) => b[1] - a[1]))
+           highestEntry = couples_map.entries().next().value;
+           coup = highestEntry[0];
+           highestVal = highestEntry[1];
+           if (highestVal == 1){
+            break;
+           }
+           gString = gString.replaceAll(coup, group[j]);
+           rules.push(group[j] + ' = ' + coup)
+           j += 1;
+        }
+        gOutString = gString
+        gRules = rules
+        }else{
+            var rules = gRules;
+            
+            if (rules == []){
+            Errorhandling('Byte Pair decoding')
+            return;
+            } 
+            rules = rules.replace('/', '') 
+            var rule_list = rules.split(',') 
+            for (var i = 0 ; i<rule_list.length ; i++){
+               rule_list[i] = rule_list[i].replaceAll(' = ', ',')
+            }
+            
+            var temp_str = gString
+            for (var i = rule_list.length-1 ; i>=0 ; i--){
+                var coup = rule_list[i].split(',')
+                temp_str = temp_str.replaceAll(coup[0], coup[1])
+            gOutString = temp_str
+            }
+        }
 }
-
 
 function Cyclic_Char(mode, amount){
     if (mode == 'Encode'){
